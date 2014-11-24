@@ -1,19 +1,9 @@
 FROM ubuntu:12.04
-MAINTAINER Doro Wu <fcwu.tw@gmail.com>
+MAINTAINER Shinji Ueno
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
-# setup our Ubuntu sources (ADD breaks caching)
-#RUN echo "deb http://tw.archive.ubuntu.com/ubuntu/ trusty main\n\
-#deb http://tw.archive.ubuntu.com/ubuntu/ trusty multiverse\n\
-#deb http://tw.archive.ubuntu.com/ubuntu/ trusty universe\n\
-#deb http://tw.archive.ubuntu.com/ubuntu/ trusty restricted\n\
-#deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main\n\
-#"> /etc/apt/sources.list
-
-# no Upstart or DBus
-# https://github.com/dotcloud/docker/issues/1724#issuecomment-26294856
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
 
@@ -25,6 +15,33 @@ RUN apt-get update \
         gtk2-engines-murrine ttf-ubuntu-font-family \
         nodejs \
         firefox \
+		autoconf2.13 \
+		bison \
+		bzip2 \
+		ccache \
+		curl \
+		flex \
+		gawk \
+		gcc \
+		g++ \
+		g++-multilib \
+		git \
+		ia32-libs \
+		lib32ncurses5-dev \
+		lib32z1-dev \
+		libgl1-mesa-dev \
+		libx11-dev \
+		make \
+		unzip \
+		zip \
+		libgtk2.0-dev \
+		libdbus-glib-1-dev \
+		yasm \
+		libasound2-dev \
+		libgstreamer0.10-dev \
+		libgstreamer-plugins-base0.10-dev \
+		libxt-dev \ 
+		wget \ 
     && apt-get autoclean \
     && apt-get autoremove
 
